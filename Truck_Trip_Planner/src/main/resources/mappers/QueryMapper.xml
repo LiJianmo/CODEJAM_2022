@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="trip_planner.mapper.QueryMapper">
+
+<!-- Input a number indicate the year and the month, and get back the list of money in the selected month -->
+<select id="findValidLoadsByStart" parameterType="java.time.LocalDateTime" resultType="trip_planner.entity.Load">
+SELECT
+pickup_date_time, origin_latitude, origin_longitude, dest_latitude, dest_longitude, 
+load_id, amount
+FROM
+Truckload
+WHERE
+pickup_date_time>#{startDateTime} 
+AND pickup_date_time&#60;#{maxDestTime}
+</select>
+
+<!-- Input a number indicate the year and the month, and get back the list of money in the selected month -->
+<select id="findLoadById" parameterType="java.lang.Integer" resultType="trip_planner.entity.Load">
+SELECT
+pickup_date_time, origin_latitude, origin_longitude, dest_latitude, dest_longitude, 
+load_id, amount
+FROM
+Truckload
+WHERE
+load_id=#{loadId}
+</select>
+
+</mapper>
